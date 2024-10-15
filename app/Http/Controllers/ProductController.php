@@ -28,6 +28,8 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+    //Validasi input data
     public function store(Request $request)
     {
         $validasi_data = $request->validate([
@@ -39,6 +41,7 @@ class ProductController extends Controller
         'producer' => 'required|string|max:255',
         ]);
 
+        //Menyimpan data ke database
         Product::create($validasi_data);
         
         return redirect()->back()->with('success', 'Product created successfully');
