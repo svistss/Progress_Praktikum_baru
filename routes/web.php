@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,4 +21,8 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/product/create', [ProductController::class, 'create'])->name("product-create");
 Route::post('/product', [ProductController::class, 'store'])->name("product-store");
-require __DIR__.'/auth.php';
+Route::get('/supplier/create', [SupplierController::class, 'create'])->name("supplier-create");
+Route::post('/supplier', [SupplierController::class, 'store'])->name("supplier-store");
+Route::get('/supplier/view', [SupplierController::class, 'index'])->name("supplier.index");
+Route::resource('suppliers', SupplierController::class);
+require __DIR__ . '/auth.php';
