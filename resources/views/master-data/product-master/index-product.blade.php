@@ -9,6 +9,18 @@
 
     <div class="container p-4 mx-auto">
         <div class="overflow-x-auto">
+
+            @if (session('success'))
+                <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
+                    role="alert">
+                    {{ session('success') }}
+                </div>
+            @elseif (session('error'))
+                <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+                    role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
             <a href="{{ route('product-create') }}">
                 <button
                     class="px-6 py-4 text-white bg-green-500 border border-green-500 rounded-lg shadow-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500">
@@ -43,7 +55,7 @@
                                 <a href="{{ route('product-edit', $item->id) }}"
                                     class="px-2 text-blue-600 hover:text-blue-800">Edit</a>
                                 <button class="px-2 text-red-600 hover:text-red-800"
-                                    onclick="confirmDelete(1)">Hapus</button>
+                                    onclick="confirmDelete('{{ route('product-deleted', $item->id) }}')">Hapus</button>
                             </td>
                         </tr>
                     @endforeach
@@ -57,7 +69,8 @@
 
 
     <script>
-        function confirmDelete(id, deleteUrl) {
+        function confirmDelete(deleteUrl) {
+            console.log(deleteUrl);
             if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
                 // Jika user mengonfirmasi, kita dapat membuat form dan mengirimkan permintaan delete
                 let form = document.createElement('form');
