@@ -38,6 +38,10 @@
                 class="px-6 py-4 text-white bg-green-500 border border-green-500 rounded-lg shadow-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500">
                 Export Data Excel
             </a>
+            <a href="{{ route('product-export-pdf') }}"
+                class="px-6 py-4 text-white bg-green-500 border border-green-500 rounded-lg shadow-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500">
+                Export Data PDF
+            </a>
             <table class="min-w-full border border-collapse border-gray-200">
                 <thead>
                     <tr class="bg-gray-100">
@@ -84,7 +88,9 @@
                 </tbody>
             </table>
             <div>
-                {{ $products->appends(['search' => request('search')])->links() }}
+                $products = Product::get();
+                $paginator = $products->paginate();
+                $paginator->appends(['search' => request('search')]);
             </div>
         </div>
     </div>
